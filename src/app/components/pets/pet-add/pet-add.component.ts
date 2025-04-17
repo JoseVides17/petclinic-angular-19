@@ -4,7 +4,7 @@ import { PetType } from '../../../models/pettypes/pettype.model';
 import { Owner } from '../../../models/owners/owner.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import { PetTypeService } from '../../../services/pettypes/pettype.service';
-import {PetService} from '../pet.service';
+import { PetService } from '../../../services/pets/pet.service';
 import { OwnerService } from '../../../services/owners/owner.service';
 
 import moment from 'moment';

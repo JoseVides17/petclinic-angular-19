@@ -6,7 +6,7 @@ import { PetListComponent } from "../../pets/pet-list/pet-list.component";
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule, HttpHandler } from '@angular/common/http';
 import { HttpErrorHandler } from '../../../services/error.service';
-import { PetService } from '../../pets/pet.service';
+import { PetService } from '../../../services/pets/pet.service';
 import { VisitService } from '../../../services/visits/visit.service';
 
 

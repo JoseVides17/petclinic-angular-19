@@ -8,7 +8,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 
 import moment from 'moment';
 import { OwnerService } from '../../../services/owners/owner.service';
-import {PetService} from '../../pets/pet.service';
+import { PetService } from '../../../services/pets/pet.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';

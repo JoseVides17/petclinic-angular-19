@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Pet } from '../../../models/pets/pet.model';
-import { PetService } from '../pet.service';
+import { PetService } from '../../../services/pets/pet.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Owner } from '../../../models/owners/owner.model';
 import { PetType } from '../../../models/pettypes/pettype.model';

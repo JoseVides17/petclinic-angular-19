@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { PetService } from '../pet.service';
+import { PetService } from '../../../services/pets/pet.service';
 import { Pet } from '../../../models/pets/pet.model';
 import { CommonModule } from '@angular/common';
 import { VisitListComponent } from '../../visits/visits-list/visits-list.component';

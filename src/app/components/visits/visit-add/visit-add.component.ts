@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import { Visit } from '../../../models/visits/visit.model';
 import { VisitService } from '../../../services/visits/visit.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {PetService} from '../../pets/pet.service';
+import { PetService } from '../../../services/pets/pet.service';
 import { Pet } from '../../../models/pets/pet.model';
 import { PetType } from '../../../models/pettypes/pettype.model';
 import { Owner } from '../../../models/owners/owner.model';
