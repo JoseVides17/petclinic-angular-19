@@ -1,79 +1,107 @@
-<div class="container-fluid">
-    <div class="container xd-container">
-      <h2>
-        Add Pet
-      </h2>
-      <form class="form-horizontal" (ngSubmit)="onSubmit(petForm.value)" #petForm="ngForm">
-        <div class="form-group" hidden="true">
-          <input type="text" hidden="true" class="form-control" id="id" [(ngModel)]="pet.id" name="id"/>
-          <input type="text" hidden="true" class="form-control" id="owner" [(ngModel)]="pet.owner" name="owner"/>
+<div class="w-full px-4 py-6 bg-gray-50 min-h-screen">
+  <div class="max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-md">
+    
+    <h2 class="text-2xl font-bold text-blue-700 mb-6 text-center">Add Pet</h2>
+
+    <form (ngSubmit)="onSubmit(petForm.value)" #petForm="ngForm" class="space-y-6">
+      
+      <!-- Campos ocultos -->
+      <input type="hidden" [(ngModel)]="pet.id" name="id" />
+      <input type="hidden" [(ngModel)]="pet.owner" name="owner" />
+
+      <!-- Owner name (solo lectura) -->
+      <div>
+        <label for="owner_name" class="block text-sm font-medium text-gray-700 mb-1">Owner</label>
+        <input
+          id="owner_name"
+          name="owner_name"
+          class="w-full px-4 py-2 border rounded-md bg-gray-100 text-gray-700"
+          type="text"
+          [value]="currentOwner.firstName + ' ' + currentOwner.lastName"
+          readonly
+        />
+      </div>
+
+      <!-- Name -->
+      <div>
+        <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Name</label>
+        <input
+          id="name"
+          name="name"
+          class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500"
+          minlength="1"
+          maxlength="30"
+          pattern="^[A-Za-z0-9].{0,29}$"
+          required
+          type="text"
+          [(ngModel)]="pet.name"
+          #name="ngModel"
+        />
+        <div class="mt-1 text-sm text-red-500 space-y-1">
+          <div *ngIf="name.dirty && name.hasError('required')">Name is required</div>
+          <div *ngIf="name.dirty && name.hasError('minlength')">Name must be at least 1 character long</div>
+          <div *ngIf="name.dirty && name.hasError('maxlength')">Name may be at most 30 characters long</div>
+          <div *ngIf="name.dirty && name.hasError('pattern')">Name must begin with a letter or digit</div>
         </div>
-        <div class="form-group">
-          <label for="owner" class="col-sm-2 control-label">Owner</label>
-          <div class="col-sm-10">
-            <input id="owner_name" name="owner_name" class="form-control" type="text"
-                   value="{{ currentOwner.firstName }} {{ currentOwner.lastName }}" readonly/>
-          </div>
+      </div>
+
+      <!-- Birth Date -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Birth Date</label>
+        <div class="flex items-center space-x-2">
+          <input
+            matInput
+            [matDatepicker]="birthDateDatepicker"
+            class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500"
+            required
+            [ngModel]="pet.birthDate | date:'yyyy-MM-dd'"
+            name="birthDate"
+            #birthDate="ngModel"
+          />
+          <mat-datepicker-toggle matSuffix [for]="birthDateDatepicker"></mat-datepicker-toggle>
+          <mat-datepicker #birthDateDatepicker></mat-datepicker>
         </div>
-        <br/>
-  
-        <div class="form-group has-feedback" [class.has-success]="name.dirty && name.valid"
-             [class.has-error]="name.dirty && !name.valid">
-          <label for="name" class="col-sm-2 control-label">Name</label>
-          <div class="col-sm-10">
-            <input id="name" name="name" minlength="1" maxlength="30"  pattern="^[A-Za-z0-9].{0,29}$" required class="form-control" type="text" [(ngModel)]="pet.name"
-                   #name="ngModel"/>
-            <span class="glyphicon form-control-feedback" [class.glyphicon-ok]="name.valid"
-                  [class.glyphicon-remove]="!name.valid" aria-hidden="true"></span>
-            <span class="help-block" *ngIf="name.dirty && name.hasError('required')">Name is required</span>
-            <span class="help-block" *ngIf="name.dirty && name.hasError('minlength')">Name must be at least 1 character long</span>
-            <span class="help-block" *ngIf="name.dirty && name.hasError('maxlength')">Name may be at most 30 character long</span>
-            <span class="help-block" *ngIf="name.dirty && name.hasError('pattern')">Name must begin with a letter</span>
-          </div>
+        <div class="mt-1 text-sm text-red-500" *ngIf="birthDate.dirty && birthDate.hasError('required')">
+          Birth Date is required
         </div>
-  
-        <div class="form-group  has-feedback" [class.has-success]="birthDate.dirty && birthDate.valid"
-             [class.has-error]="birthDate.dirty && !birthDate.valid">
-          <label class="col-sm-2 control-label">Birth Date</label>
-          <div class="col-sm-10">
-            <input matInput [matDatepicker]="birthDateDatepicker" required [ngModel]="pet.birthDate | date:'yyyy-MM-dd'"
-                   name="birthDate" #birthDate="ngModel">
-            <mat-datepicker-toggle matSuffix [for]="birthDateDatepicker"></mat-datepicker-toggle>
-            <mat-datepicker #birthDateDatepicker></mat-datepicker>
-            <span class="glyphicon form-control-feedback" [class.glyphicon-ok]="birthDate.valid"
-                  [class.glyphicon-remove]="!birthDate.valid" aria-hidden="true"></span>
-            <span class="help-block"
-                  *ngIf="birthDate.dirty && birthDate.hasError('required')">BirthDate is required</span>
-  
-          </div>
+      </div>
+
+      <!-- Type -->
+      <div>
+        <label for="type" class="block text-sm font-medium text-gray-700 mb-1">Type</label>
+        <select
+          id="type"
+          name="type"
+          class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500"
+          required
+          [(ngModel)]="pet.type"
+          #type="ngModel"
+        >
+          <option *ngFor="let type of petTypes" [ngValue]="type">{{ type.name }}</option>
+        </select>
+        <div class="mt-1 text-sm text-red-500" *ngIf="type.dirty && type.hasError('required')">
+          Pet type is required
         </div>
-        <div class="control-group">
-          <div class="form-group has-feedback" [class.has-success]="type.dirty && type.valid"
-               [class.has-error]="type.dirty && !type.valid">
-            <label for="type" class="col-sm-2 control-label">Type </label>
-            <div class="col-sm-10">
-              <select id="type" name="type" class="form-control" required [(ngModel)]="pet.type" #type="ngModel">
-                <option *ngFor="let type of petTypes"
-                        [ngValue]="type">{{ type.name }}
-                </option>
-              </select>
-              <span class="glyphicon form-control-feedback" [class.glyphicon-ok]="type.valid"
-                    [class.glyphicon-remove]="!type.valid" aria-hidden="true"></span>
-  
-              <span class="help-block"
-                    *ngIf="type.dirty && type.hasError('required')">pettype is required</span>
-  
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="col-sm-offset-2 col-sm-10">
-            <br/>
-            <button class="btn btn-default" type="button" (click)="gotoOwnerDetail()">Back</button>
-            <button class="btn btn-default" type="submit"  [disabled]="!petForm.valid">Save Pet</button>
-          </div>
-        </div>
-      </form>
-    </div>
+      </div>
+
+      <!-- Botones -->
+      <div class="flex justify-end gap-3 pt-4">
+        <button
+          type="button"
+          class="px-5 py-2 bg-gray-300 text-gray-800 rounded hover:bg-gray-400 transition"
+          (click)="gotoOwnerDetail()"
+        >
+          Back
+        </button>
+        <button
+          type="submit"
+          class="px-5 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+          [disabled]="!petForm.valid"
+        >
+          Save Pet
+        </button>
+      </div>
+    </form>
+
   </div>
-  
+</div>

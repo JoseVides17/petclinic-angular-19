@@ -3,71 +3,121 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
         <div class="flex items-center">
-          <div class="flex items-center">
-            <img src="../assets/logo.png" alt="Logo" class="h-16 w-auto mr-3 rounded-full">
-            <span class="text-gray-400 text-lg">PetClinic</span>
-          </div>
-          <div class="hidden md:block">
-            <div class="ml-10 flex items-baseline space-x-4">
-              <a href="/welcome" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+          <img src="../assets/logo.png" alt="Logo" class="h-16 w-auto mr-3 rounded-full">
+          <span class="text-gray-400 text-lg">PetClinic</span>
+        </div>
+  
+        <!-- Botón hamburguesa (visible solo en pantallas pequeñas) -->
+        <div class="md:hidden">
+          <button (click)="menuOpen = !menuOpen" class="text-gray-300 hover:text-white focus:outline-none">
+            <i class="bi bi-list text-2xl"></i>
+          </button>
+        </div>
+  
+        <!-- Menú para pantallas grandes -->
+        <div class="hidden md:block">
+          <div class="ml-10 flex items-baseline space-x-4">
+            <a href="/welcome" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
               <i class="bi bi-house"></i> Home
             </a>
-              
-              <!-- Owners Dropdown -->
-              <div class="relative group">
-                <button class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium inline-flex items-center">
-                  <i class="bi bi-person"></i>
-                  <span class="ml-1">Owners</span>
-                  <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
-                <div class="absolute left-0 mt-1 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10">
-                  <div class="py-1">
-                    <a href="/owners" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                      <i class="bi bi-search"></i> Search
-                    </a>
-                    <a href="/owners/add" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                      <i class="bi bi-plus-lg"></i> Add New
-                    </a>
-                  </div>
+  
+            <!-- Owners Dropdown -->
+            <div class="relative group">
+              <button class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium inline-flex items-center">
+                <i class="bi bi-person"></i>
+                <span class="ml-1">Owners</span>
+                <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              <div class="absolute left-0 mt-1 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10">
+                <div class="py-1">
+                  <a href="/owners" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    <i class="bi bi-search"></i> Search
+                  </a>
+                  <a href="/owners/add" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    <i class="bi bi-plus-lg"></i> Add New
+                  </a>
                 </div>
               </div>
-
-              <!-- Veterinarians Dropdown -->
-              <div class="relative group">
-                <button class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium inline-flex items-center">
-                  <i class="bi bi-briefcase"></i>
-                  <span class="ml-1">Veterinarians</span>
-                  <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
-                <div class="absolute left-0 mt-1 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10">
-                  <div class="py-1">
-                    <a href="/vets" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                      <i class="bi bi-search"></i> All
-                    </a>
-                    <a href="/vets/add" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                      <i class="bi bi-plus-lg"></i> Add New
-                    </a>
-                  </div>
+            </div>
+  
+            <!-- Vets Dropdown -->
+            <div class="relative group">
+              <button class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium inline-flex items-center">
+                <i class="bi bi-briefcase"></i>
+                <span class="ml-1">Veterinarians</span>
+                <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              <div class="absolute left-0 mt-1 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10">
+                <div class="py-1">
+                  <a href="/vets" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    <i class="bi bi-search"></i> All
+                  </a>
+                  <a href="/vets/add" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    <i class="bi bi-plus-lg"></i> Add New
+                  </a>
                 </div>
               </div>
-
-              <a href="/pettypes" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+            </div>
+  
+            <a href="/pettypes" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
               <i class="bi bi-heart"></i> Pet Types
             </a>
-              <a href="/specialties" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+            <a href="/specialties" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
               <i class="bi bi-list"></i> Specialties
             </a>
-            </div>
           </div>
         </div>
       </div>
     </div>
+  
+    <!-- Menú desplegable para móviles -->
+    <div *ngIf="menuOpen" class="md:hidden px-4 pb-4 space-y-2">
+      <a href="/welcome" class="block px-3 py-2 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md text-base font-medium">
+        <i class="bi bi-house"></i> Home
+      </a>
+    
+      <!-- Owners Toggle -->
+      <button (click)="ownersOpen = !ownersOpen" class="w-full text-left px-3 py-2 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md text-base font-medium flex justify-between items-center">
+        <span><i class="bi bi-person"></i> Owners</span>
+        <i [ngClass]="ownersOpen ? 'bi bi-chevron-up' : 'bi bi-chevron-down'"></i>
+      </button>
+      <div *ngIf="ownersOpen" class="pl-6 space-y-1">
+        <a href="/owners" class="block px-3 py-2 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md text-sm">
+          <i class="bi bi-search"></i> Search Owners
+        </a>
+        <a href="/owners/add" class="block px-3 py-2 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md text-sm">
+          <i class="bi bi-plus-lg"></i> Add Owner
+        </a>
+      </div>
+    
+      <!-- Vets Toggle -->
+      <button (click)="vetsOpen = !vetsOpen" class="w-full text-left px-3 py-2 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md text-base font-medium flex justify-between items-center">
+        <span><i class="bi bi-briefcase"></i> Veterinarians</span>
+        <i [ngClass]="vetsOpen ? 'bi bi-chevron-up' : 'bi bi-chevron-down'"></i>
+      </button>
+      <div *ngIf="vetsOpen" class="pl-6 space-y-1">
+        <a href="/vets" class="block px-3 py-2 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md text-sm">
+          <i class="bi bi-search"></i> All Vets
+        </a>
+        <a href="/vets/add" class="block px-3 py-2 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md text-sm">
+          <i class="bi bi-plus-lg"></i> Add Vet
+        </a>
+      </div>
+    
+      <a href="/pettypes" class="block px-3 py-2 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md text-base font-medium">
+        <i class="bi bi-heart"></i> Pet Types
+      </a>
+      <a href="/specialties" class="block px-3 py-2 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md text-base font-medium">
+        <i class="bi bi-list"></i> Specialties
+      </a>
+    </div>
+    
   </nav>
-
+  
   <main class="flex-grow">
     <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
       <router-outlet></router-outlet>

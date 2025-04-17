@@ -11,4 +11,8 @@ import { CommonModule } from '@angular/common';
 })
 export class AppComponent {
   title = 'petclinic-angular-19';
+  menuOpen: boolean = false;
+  ownersOpen: boolean = false;
+  vetsOpen: boolean = false;
+
 }
