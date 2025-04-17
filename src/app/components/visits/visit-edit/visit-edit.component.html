@@ -1,0 +1,85 @@
+<div class="max-w-4xl mx-auto px-4 py-8 bg-white shadow rounded-lg">
+  <h2 class="text-2xl font-semibold mb-6">Editar Visita</h2>
+
+  <div class="mb-4">
+    <h3 class="font-semibold text-gray-700">Mascota</h3>
+    <table class="w-full table-auto border-collapse shadow-sm mt-2">
+      <thead class="bg-gray-100 text-sm text-gray-600">
+        <tr>
+          <th class="px-4 py-2 text-left">Nombre</th>
+          <th class="px-4 py-2 text-left">Fecha de Nacimiento</th>
+          <th class="px-4 py-2 text-left">Tipo</th>
+          <th class="px-4 py-2 text-left">Dueño</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="bg-white">
+          <td class="px-4 py-2">{{ currentPet.name }}</td>
+          <td class="px-4 py-2">{{ currentPet.birthDate }}</td>
+          <td class="px-4 py-2">{{ currentPetType.name }}</td>
+          <td class="px-4 py-2">{{ currentOwner.firstName }} {{ currentOwner.lastName }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <form (ngSubmit)="onSubmit(visitForm.value)" #visitForm="ngForm" class="space-y-6">
+    <div>
+      <label class="block text-gray-700 font-medium mb-1">Fecha</label>
+      <div>
+        <input
+          matInput
+          [matDatepicker]="visitDateDatepicker"
+          required
+          [ngModel]="visit.date | date:'yyyy-MM-dd'"
+          name="date"
+          #date="ngModel"
+          class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        <mat-datepicker-toggle matSuffix [for]="visitDateDatepicker"></mat-datepicker-toggle>
+        <mat-datepicker #visitDateDatepicker></mat-datepicker>
+        <p *ngIf="date.dirty && date.hasError('required')" class="text-red-500 text-sm mt-1">La fecha es obligatoria.</p>
+      </div>
+    </div>
+
+    <div>
+      <label for="description" class="block text-gray-700 font-medium mb-1">Descripción</label>
+      <input
+        id="description"
+        name="description"
+        type="text"
+        minlength="1"
+        maxlength="255"
+        required
+        [(ngModel)]="visit.description"
+        #description="ngModel"
+        class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+      <div class="text-sm text-red-500 mt-1" *ngIf="description.dirty">
+        <span *ngIf="description.hasError('required')">La descripción es obligatoria.</span>
+        <span *ngIf="description.hasError('minlength')">Debe tener al menos 1 carácter.</span>
+        <span *ngIf="description.hasError('maxlength')">No debe superar los 255 caracteres.</span>
+      </div>
+    </div>
+
+    <div class="flex justify-between items-center">
+      <input type="hidden" name="id" [(ngModel)]="visit.id" />
+      <input type="hidden" name="pet" [(ngModel)]="visit.pet" />
+
+      <button
+        type="button"
+        (click)="gotoOwnerDetail()"
+        class="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400 transition"
+      >
+        Atrás
+      </button>
+      <button
+        type="submit"
+        [disabled]="visitForm.invalid"
+        class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-500 transition"
+      >
+        Actualizar Visita
+      </button>
+    </div>
+  </form>
+</div>

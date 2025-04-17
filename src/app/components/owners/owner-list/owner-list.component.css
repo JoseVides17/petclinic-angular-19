@@ -1,0 +1,18 @@
+#ownersByLastName
+{
+display:none;
+}
+
+.ownerFullName{
+
+    text-decoration: none;
+    color: chartreuse;
+
+}
+
+.ownerFullName:hover{
+
+    text-decoration: underline;
+    color: white;
+
+}

@@ -1,0 +1,107 @@
+<div class="container mx-auto px-4 py-8">
+  <div class="max-w-2xl mx-auto">
+    <h2 class="text-2xl font-bold mb-6 text-gray-800">Nuevo Veterinario</h2>
+    
+    <form id="vet" class="space-y-6" (ngSubmit)="onSubmit(vetForm.value)" #vetForm="ngForm">
+      <div class="hidden">
+        <input type="text" hidden="true" id="id" [(ngModel)]="vet.id" name="id"/>
+      </div>
+      
+      <!-- Nombre -->
+      <div class="space-y-2">
+        <label for="firstName" class="block text-sm font-medium text-gray-700">Nombre</label>
+        <div class="relative">
+          <input 
+            type="text" 
+            class="input-field" 
+            [class.border-red-500]="firstName.dirty && !firstName.valid"
+            [class.border-green-500]="firstName.dirty && firstName.valid"
+            id="firstName" 
+            [(ngModel)]="vet.firstName"  
+            minlength="1" 
+            maxlength="30" 
+            pattern="^[a-zA-Z]*$"  
+            required 
+            name="firstName" 
+            #firstName="ngModel"
+          />
+          <div class="absolute inset-y-0 right-0 flex items-center pr-3">
+            <i *ngIf="firstName.valid && firstName.dirty" class="bi bi-check-circle-fill text-green-500"></i>
+            <i *ngIf="!firstName.valid && firstName.dirty" class="bi bi-x-circle-fill text-red-500"></i>
+          </div>
+        </div>
+        <div class="text-sm text-red-600 space-y-1">
+          <p *ngIf="firstName.dirty && firstName.hasError('maxlength')">El nombre no puede tener más de 30 caracteres</p>
+          <p *ngIf="firstName.dirty && firstName.hasError('minlength')">El nombre debe tener al menos 1 carácter</p>
+          <p *ngIf="firstName.dirty && firstName.hasError('pattern')">El nombre solo puede contener letras</p>
+          <p *ngIf="(vetForm.submitted && firstName.hasError('required')) || (firstName.dirty && firstName.hasError('required'))">El nombre es obligatorio</p>
+        </div>
+      </div>
+      
+      <!-- Apellido -->
+      <div class="space-y-2">
+        <label for="lastName" class="block text-sm font-medium text-gray-700">Apellido</label>
+        <div class="relative">
+          <input 
+            type="text" 
+            class="input-field" 
+            [class.border-red-500]="lastName.dirty && !lastName.valid"
+            [class.border-green-500]="lastName.dirty && lastName.valid"
+            id="lastName" 
+            [(ngModel)]="vet.lastName" 
+            name="lastName" 
+            minlength="1" 
+            maxlength="30" 
+            pattern="^[a-zA-Z]*$"  
+            required 
+            #lastName="ngModel"
+          />
+          <div class="absolute inset-y-0 right-0 flex items-center pr-3">
+            <i *ngIf="lastName.valid && lastName.dirty" class="bi bi-check-circle-fill text-green-500"></i>
+            <i *ngIf="!lastName.valid && lastName.dirty" class="bi bi-x-circle-fill text-red-500"></i>
+          </div>
+        </div>
+        <div class="text-sm text-red-600 space-y-1">
+          <p *ngIf="lastName.dirty && lastName.hasError('maxlength')">El apellido no puede tener más de 30 caracteres</p>
+          <p *ngIf="lastName.dirty && lastName.hasError('minlength')">El apellido debe tener al menos 1 carácter</p>
+          <p *ngIf="lastName.dirty && lastName.hasError('pattern')">El apellido solo puede contener letras</p>
+          <p *ngIf="(vetForm.submitted && lastName.hasError('required')) || (lastName.dirty && lastName.hasError('required'))">El apellido es obligatorio</p>
+        </div>
+      </div>
+      
+      <!-- Especialidades -->
+      <div class="space-y-2">
+        <label for="specialties" class="block text-sm font-medium text-gray-700">Especialidad</label>
+        <select 
+          id="specialties" 
+          name="specialties" 
+          class="input-field" 
+          [(ngModel)]="selectedSpecialty"
+        >
+          <option *ngFor="let spec of specialtiesList" [ngValue]="spec">
+            {{ spec.name }}
+          </option>
+        </select>
+      </div>
+      
+      <!-- Botones -->
+      <div class="flex justify-between pt-4">
+        <button 
+          type="button" 
+          class="px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" 
+          (click)="gotoVetList()"
+        >
+          <i class="bi bi-arrow-left mr-2"></i> Volver
+        </button>
+        <button 
+          type="submit" 
+          class="btn-primary" 
+          [disabled]="!vetForm.valid"
+        >
+          Guardar Veterinario
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+  

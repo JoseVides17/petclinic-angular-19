@@ -1,0 +1,70 @@
+<div class="container mx-auto px-4 py-8">
+  <div class="max-w-6xl mx-auto">
+    <h2 class="text-2xl font-bold mb-6 text-gray-800">Tipos de Mascotas</h2>
+
+    <!-- Tabla de tipos de mascotas -->
+    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-800">
+            <tr>
+              <th class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Nombre</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Acciones</th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+            <tr *ngFor="let pettype of pettypes; let element_id = index" class="hover:bg-gray-50">
+              <td class="px-6 py-4 whitespace-nowrap">
+                <input 
+                  [id]="element_id" 
+                  [readonly]="true" 
+                  type="text" 
+                  [(ngModel)]="pettype.name" 
+                  name="pettype_name"
+                  class="input-field w-full"
+                />
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap space-x-2">
+                <button 
+                  class="btn-primary" 
+                  (click)="showEditPettypeComponent(pettype)"
+                >
+                  Editar
+                </button>
+                <button 
+                  class="bg-red-600 hover:bg-red-500 text-white px-4 py-2 rounded" 
+                  (click)="deletePettype(pettype)"
+                >
+                  Eliminar
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Componente de añadir nuevo tipo -->
+    <div *ngIf="isInsert" class="mt-6">
+      <app-pettype-add (newPetType)="onNewPettype($event)"></app-pettype-add>
+    </div>
+
+    <!-- Botones de acciones -->
+    <div class="mt-6 flex flex-col md:flex-row gap-4">
+      <button 
+        *ngIf="isPetTypesDataReceived" 
+        class="btn-secondary" 
+        (click)="gotoHome()"
+      >
+        <i class="bi bi-house-door mr-2"></i> Inicio
+      </button>
+      <button 
+        *ngIf="isPetTypesDataReceived" 
+        class="btn-primary" 
+        (click)="showAddPettypeComponent()"
+      >
+        <i class="bi bi-plus-lg mr-2"></i> Añadir Tipo
+      </button>
+    </div>
+  </div>
+</div>

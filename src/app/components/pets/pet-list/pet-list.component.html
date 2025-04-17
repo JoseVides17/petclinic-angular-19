@@ -1,0 +1,54 @@
+<div *ngIf="!deleteSuccess" class="bg-white shadow-md rounded-lg p-6 mb-6">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+    <!-- Detalles de la mascota -->
+    <div>
+      <h3 class="text-xl font-semibold text-gray-800 mb-4">Detalles de la Mascota</h3>
+      <dl class="space-y-4">
+        <div>
+          <dt class="text-sm font-medium text-gray-500">Nombre</dt>
+          <dd class="text-base text-gray-900">{{ pet.name }}</dd>
+        </div>
+        <div>
+          <dt class="text-sm font-medium text-gray-500">Fecha de nacimiento</dt>
+          <dd class="text-base text-gray-900">{{ pet.birthDate }}</dd>
+        </div>
+        <div>
+          <dt class="text-sm font-medium text-gray-500">Tipo</dt>
+          <dd class="text-base text-gray-900">{{ pet.type.name }}</dd>
+        </div>
+      </dl>
+
+      <!-- Botones -->
+      <div class="mt-6 flex flex-wrap gap-3">
+        <button 
+          class="flex items-center px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm font-medium rounded transition"
+          (click)="editPet(pet)"
+        >
+          <i class="bi bi-pencil mr-2"></i> Editar Mascota
+        </button>
+
+        <button 
+          class="flex items-center px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded transition"
+          (click)="deletePet(pet)"
+        >
+          <i class="bi bi-trash mr-2"></i> Eliminar Mascota
+        </button>
+
+        <button 
+          class="flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded transition"
+          (click)="addVisit(pet)"
+        >
+          <i class="bi bi-plus-lg mr-2"></i> Añadir Visita
+        </button>
+      </div>
+    </div>
+
+    <!-- Lista de visitas -->
+    <div>
+      <h3 class="text-xl font-semibold text-gray-800 mb-4">Visitas</h3>
+      <app-visit-list [visits]="pet.visits"></app-visit-list>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,27 @@
+<table *ngIf="!noVisits" class="min-w-full divide-y divide-gray-200 shadow rounded-lg overflow-hidden">
+  <thead class="bg-gray-100 text-gray-600 uppercase text-sm">
+    <tr>
+      <th class="px-4 py-2 text-left">Fecha de Visita</th>
+      <th class="px-4 py-2 text-left">Descripción</th>
+      <th class="px-4 py-2 text-left">Acciones</th>
+    </tr>
+  </thead>
+  <tbody class="bg-white divide-y divide-gray-200">
+    <tr *ngFor="let visit of visits" class="hover:bg-gray-50">
+      <td class="px-4 py-2">{{ visit.date }}</td>
+      <td class="px-4 py-2">{{ visit.description }}</td>
+      <td class="px-4 py-2 space-x-2">
+        <button
+          (click)="editVisit(visit)"
+          class="bg-blue-600 hover:bg-blue-500 text-white font-medium px-3 py-1 rounded shadow-sm transition">
+          Editar
+        </button>
+        <button
+          (click)="deleteVisit(visit)"
+          class="bg-red-600 hover:bg-red-500 text-white font-medium px-3 py-1 rounded shadow-sm transition">
+          Eliminar
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

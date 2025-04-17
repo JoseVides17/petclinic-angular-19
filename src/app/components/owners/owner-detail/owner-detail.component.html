@@ -1,0 +1,55 @@
+<div class="container mx-auto px-4 py-8">
+  <div class="max-w-4xl mx-auto">
+    <h2 class="text-2xl font-bold mb-6 text-gray-800">Información del Propietario</h2>
+
+    <!-- Información del propietario -->
+    <div class="bg-white rounded-lg shadow-md overflow-hidden mb-8">
+      <table class="min-w-full divide-y divide-gray-200">
+        <tbody class="bg-white divide-y divide-gray-200">
+          <tr class="hover:bg-gray-50">
+            <th class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500 bg-gray-50 w-1/4">Nombre</th>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+              <span class="font-semibold">{{ owner.firstName }} {{ owner.lastName }}</span>
+            </td>
+          </tr>
+          <tr class="hover:bg-gray-50">
+            <th class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500 bg-gray-50">Dirección</th>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ owner.address }}</td>
+          </tr>
+          <tr class="hover:bg-gray-50">
+            <th class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500 bg-gray-50">Ciudad</th>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ owner.city }}</td>
+          </tr>
+          <tr class="hover:bg-gray-50">
+            <th class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500 bg-gray-50">Teléfono</th>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ owner.telephone }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Botones de acción -->
+    <div class="flex flex-wrap gap-3 mb-8">
+      <button class="btn-primary" (click)="gotoOwnersList()">
+        <i class="bi bi-arrow-left mr-2"></i> Volver
+      </button>
+      <button class="btn-primary" (click)="editOwner()">
+        <i class="bi bi-pencil mr-2"></i> Editar Propietario
+      </button>
+      <button class="btn-primary" (click)="addPet(owner)">
+        <i class="bi bi-plus-lg mr-2"></i> Añadir Mascota
+      </button>
+    </div>
+
+    <!-- Mascotas y visitas -->
+    <h2 class="text-2xl font-bold mb-6 text-gray-800">Mascotas y Visitas</h2>
+    
+    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+      <div class="divide-y divide-gray-200">
+        <div *ngFor="let pet of owner.pets" class="p-4">
+          <app-pet-list [pet]="pet"></app-pet-list>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

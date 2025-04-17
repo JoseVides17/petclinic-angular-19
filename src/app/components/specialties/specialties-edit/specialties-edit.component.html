@@ -1,0 +1,73 @@
+<div class="w-full px-4 py-6 bg-gray-50 min-h-screen">
+    <div class="max-w-xl mx-auto bg-white p-6 rounded-lg shadow-lg">
+      
+      <h2 class="text-2xl font-bold text-blue-700 mb-6 text-center">Edit Specialty</h2>
+      
+      <form (ngSubmit)="onSubmit(specialtyForm.value)" #specialtyForm="ngForm" class="space-y-4">
+  
+        <!-- Campo oculto para el ID -->
+        <input 
+          type="text" 
+          hidden 
+          class="hidden" 
+          id="id" 
+          [(ngModel)]="specialty.id" 
+          name="id"
+        />
+  
+        <!-- Campo para el nombre -->
+        <div>
+          <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Name</label>
+          <input
+            id="name"
+            name="name"
+            class="w-full px-4 py-2 border rounded-md shadow-sm focus:ring-2 focus:ring-blue-400 focus:outline-none"
+            minlength="1"
+            maxlength="80"
+            pattern="^[A-Za-z0-9].{0,79}$"
+            required
+            type="text"
+            [(ngModel)]="specialty.name"
+            #name="ngModel"
+          />
+  
+          <!-- Mensajes de error -->
+          <div class="mt-1 text-sm text-red-500 space-y-1">
+            <div *ngIf="name.dirty && name.hasError('maxlength')">
+              Name may be only 80 characters long
+            </div>
+            <div *ngIf="name.dirty && name.hasError('minlength')">
+              Name must be at least 1 character long
+            </div>
+            <div *ngIf="name.dirty && name.hasError('pattern')">
+              Name must begin with a letter or digit
+            </div>
+            <div *ngIf="name.dirty && name.hasError('required')">
+              Name is required
+            </div>
+          </div>
+        </div>
+  
+        <!-- Botones -->
+        <div class="flex justify-end gap-2 pt-2">
+          <button 
+            type="submit" 
+            class="px-5 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+            [disabled]="!specialtyForm.valid"
+          >
+            Update
+          </button>
+  
+          <button 
+            type="button" 
+            class="px-5 py-2 bg-gray-300 text-gray-800 rounded hover:bg-gray-400 transition"
+            (click)="onBack()"
+          >
+            Cancel
+          </button>
+        </div>
+  
+      </form>
+    </div>
+  </div>
+  

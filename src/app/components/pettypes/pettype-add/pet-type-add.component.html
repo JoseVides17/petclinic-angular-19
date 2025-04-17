@@ -1,0 +1,56 @@
+
+
+    <h2 class="text-2xl font-bold text-gray-800 mb-6">New Pet Type</h2>
+
+    <form 
+      id="pettype" 
+      (ngSubmit)="onSubmit(pettypeForm.value)" 
+      #pettypeForm="ngForm"
+      class="space-y-6"
+    >
+      <!-- Campo oculto para el ID -->
+      <input 
+        type="hidden" 
+        id="id" 
+        name="id" 
+        [(ngModel)]="pettype.id"
+      />
+
+      <!-- Campo de Nombre -->
+      <div>
+        <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Name</label>
+        <input 
+          id="name" 
+          name="name" 
+          type="text"
+          required
+          minlength="1"
+          maxlength="80"
+          pattern="^[A-Za-z0-9].{0,79}$"
+          [(ngModel)]="pettype.name"
+          #name="ngModel"
+          class="input-field"
+        />
+
+        <!-- Mensajes de validación -->
+        <div class="mt-1 text-sm text-red-600 space-y-1" *ngIf="name.dirty || pettypeForm.submitted">
+          <p *ngIf="name.hasError('required')">El nombre es obligatorio.</p>
+          <p *ngIf="name.hasError('maxlength')">El nombre no puede tener más de 80 caracteres.</p>
+          <p *ngIf="name.hasError('minlength')">El nombre debe tener al menos 1 carácter.</p>
+          <p *ngIf="name.hasError('pattern')">El nombre debe comenzar con una letra o número.</p>
+        </div>
+      </div>
+
+      <!-- Botón de guardar -->
+      <div>
+        <button 
+          type="submit" 
+          class="btn-primary"
+          [disabled]="!pettypeForm.valid"
+        >
+          <i class="bi bi-save mr-2"></i> Guardar
+        </button>
+      </div>
+    </form>
+
+
